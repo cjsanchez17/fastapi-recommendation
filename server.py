@@ -17,7 +17,7 @@ def download_file(url, destination):
         print(f"{destination} downloaded successfully.")
 
 files_to_download = {
-    "/data/tag_vector.pt": "https://www.dropbox.com/scl/fi/1vn101f23ujxbzt46li1w/tag_vector.pt?dl=1",
+    "/data/tag_vector.pt": "https://www.dropbox.com/scl/fi/i9k3rp8ii7mtdznugcsv4/tag_vector.npy?dl=1",
     "/data/tag_list.npy": "https://www.dropbox.com/scl/fi/k4idf4jp0qogdu1avq7pt/tag_list.npy?dl=1",
     "/data/music_vocab_embeddings.bin": "https://www.dropbox.com/scl/fi/crcjlug8hc7honln0eotu/music_vocab_embeddings.bin?dl=1",
     "/data/wiki-news-300d-1M.vec": "https://www.dropbox.com/scl/fi/iwx25ofsgrg2hopf9mrkf/wiki-news-300d-1M.vec?dl=1",
@@ -38,14 +38,14 @@ app.add_middleware(
 )
 
 # Use /data/ directory on Render for storing large files
-TAG_VECTOR_FILE = "/data/tag_vector.pt"
+TAG_VECTOR_FILE = "/data/tag_vector.npy"
 TAG_LIST_FILE = "/data/tag_list.npy"
 FASTTEXT_PATH = "/data/wiki-news-300d-1M.vec"
 REDDIT_MODEL_PATH = "/data/music_vocab_embeddings.bin"
 FAISS_INDEX_FILE = "/data/music_embeddings.index"
 
 # Load the models and embeddings from persistent disk storage
-tag_vector = torch.load(TAG_VECTOR_FILE, weights_only=False)
+tag_vector = torch.tensor(np.load(TAG_VECTOR_FILE))
 tag_list = np.load(TAG_LIST_FILE, allow_pickle=True).tolist()
 fasttext_vectors = KeyedVectors.load_word2vec_format(FASTTEXT_PATH, binary=False)
 model = fasttext.load_model(REDDIT_MODEL_PATH)

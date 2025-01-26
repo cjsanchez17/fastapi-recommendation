@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+torch
+numpy
+pandas
+faiss-cpu
+fasttext
+gensim

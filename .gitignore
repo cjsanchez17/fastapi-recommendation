@@ -1,0 +1,22 @@
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore large model files
+data/*.pt
+data/*.npy
+data/*.bin
+data/*.index
+data/*.vec
+
+# Ignore virtual environment (if using locally)
+env/
+venv/
+
+# Ignore environment variables
+.env
+
+# Ignore cache and logs
+*.log
+*.cache/

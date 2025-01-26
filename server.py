@@ -5,7 +5,27 @@ import faiss
 import numpy as np
 from gensim.models import KeyedVectors
 import fasttext
+import os
+import requests
 
+def download_file(url, destination):
+    if not os.path.exists(destination):
+        print(f"Downloading {destination}...")
+        response = requests.get(url, allow_redirects=True)
+        with open(destination, 'wb') as f:
+            f.write(response.content)
+        print(f"{destination} downloaded successfully.")
+
+files_to_download = {
+    "/data/tag_vector.pt": "https://www.dropbox.com/scl/fi/1vn101f23ujxbzt46li1w/tag_vector.pt?dl=1",
+    "/data/tag_list.npy": "https://www.dropbox.com/scl/fi/k4idf4jp0qogdu1avq7pt/tag_list.npy?dl=1",
+    "/data/music_vocab_embeddings.bin": "https://www.dropbox.com/scl/fi/crcjlug8hc7honln0eotu/music_vocab_embeddings.bin?dl=1",
+    "/data/wiki-news-300d-1M.vec": "https://www.dropbox.com/scl/fi/iwx25ofsgrg2hopf9mrkf/wiki-news-300d-1M.vec?dl=1",
+    "/data/music_embeddings.index": "https://www.dropbox.com/scl/fi/u2bys80c5zdk5h2dm3nmi/music_embeddings.index?dl=1",
+}
+
+for file_path, file_url in files_to_download.items():
+    download_file(file_url, file_path)
 app = FastAPI()
 
 # CORS Configuration to allow frontend and Express backend to interact

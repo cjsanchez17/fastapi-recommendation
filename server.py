@@ -45,7 +45,7 @@ REDDIT_MODEL_PATH = "/data/music_vocab_embeddings.bin"
 FAISS_INDEX_FILE = "/data/music_embeddings.index"
 
 # Load the models and embeddings from persistent disk storage
-tag_vector = torch.load(TAG_VECTOR_FILE, weights_only=True)
+tag_vector = torch.load(TAG_VECTOR_FILE, weights_only=False)
 tag_list = np.load(TAG_LIST_FILE, allow_pickle=True).tolist()
 fasttext_vectors = KeyedVectors.load_word2vec_format(FASTTEXT_PATH, binary=False)
 model = fasttext.load_model(REDDIT_MODEL_PATH)

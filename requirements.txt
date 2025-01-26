@@ -6,3 +6,4 @@ pandas
 faiss-cpu
 fasttext
 gensim
+requests

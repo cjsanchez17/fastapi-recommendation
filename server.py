@@ -57,7 +57,7 @@ FAISS_INDEX_FILE = "/data/music_embeddings.index"
 @app.on_event("startup")
 async def load_models():
     global tag_vector, tag_list, fasttext_vectors, model, index
-    tag_vector = torch.tensor(np.load(TAG_VECTOR_FILE, mmap_mode='r', allow_pickle=True))
+    tag_vector = torch.tensor(np.load(TAG_VECTOR_FILE))
     tag_list = np.load(TAG_LIST_FILE, allow_pickle=True).tolist()
     fasttext_vectors = KeyedVectors.load_word2vec_format(FASTTEXT_PATH, binary=False)
     model = fasttext.load_model(REDDIT_MODEL_PATH)
